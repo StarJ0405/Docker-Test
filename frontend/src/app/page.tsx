@@ -1,113 +1,62 @@
-import Image from "next/image";
+"use client";
+import { useState, useEffect } from "react";
+import { Login } from "./API/AuthAPI";
 
+// { params, searchParam }: { params: any, searchParam: any }
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+  const [username, setUsername] = useState<string>();
+  const [password, setPassword] = useState<string>();
+
+  function Sumbit() {
+    if (username && password)
+      Login({ username: username, password: password }).then(r => {
+        localStorage.clear();
+        localStorage.setItem('tokenType', r.tokenType);
+        localStorage.setItem('accessToken', r.accessToken);
+        localStorage.setItem('refreshToken', r.refreshToken);
+        window.location.href = '/main';
+      }).catch(e => console.log(e))
+  }
+  return <main >
+    <div className="flex justify-center items-center flex-col h-screen w-screen bg-white">
+
+      {/* 로고 */}
+      <img src="/logo.png" className="w-[200px] h-[200px] mb-8" alt="로고" />
+
+      {/* 로그인 */}
+      <div className="text-5xl mb-10 font-bold">
+        <p>L O G I N</p>
       </div>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      {/* 이메일 */}
+      <div className="flex flex-row border-2 border-gray-300 rounded-md w-[400px] h-[40px] mb-2">
+        <img src="mail.png" className="w-[30px] h-[30px] m-1" alt="메일 사진" />
+        <input type="text" placeholder="email" className="bolder-0 outline-none" onChange={e => setUsername(e.target.value)} />
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      {/* 비밀번호 */}
+      <div className="flex flex-row border-2 border-gray-300 rounded-md w-[400px] h-[40px] mb-8" >
+        <img src="password.png" className="w-[30px] h-[30px] m-1" alt="비밀번호 사진" />
+        <input type="password" placeholder="password" className="bolder-0 outline-none" onChange={e => setPassword(e.target.value)} 
+        
+        // 엔터로 로그인 할 수 있게 하는 부분
+        onKeyDown={e=>{
+          if(e.key=="Enter")
+              document.getElementById('login')?.click();
+        }} />
       </div>
-    </main>
-  );
+
+      {/* 버튼 */}
+      <button id="login" className="login-button w-[400px] h-[40px] mb-5 font-semibold" type="submit" onClick={() => Sumbit()}
+      >L O G I N</button>
+
+      {/* 찾기 */}
+      <div className="flex flex-row">
+        <a className="mr-5 text-gray-500 text-sm font-semibold" href="">아이디 찾기</a>
+        <p className="text-gray-500 text-sm"> | </p>
+        <a className="ml-5 mb-5 text-gray-500 text-sm font-semibold" href="">비밀번호 찾기</a>
+      </div>
+    </div>
+
+  </main>
 }
