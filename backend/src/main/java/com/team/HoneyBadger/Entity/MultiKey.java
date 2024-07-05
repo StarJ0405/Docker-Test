@@ -1,28 +1,24 @@
 package com.team.HoneyBadger.Entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.HashSet;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class MultiKey {
     @Id
-    @Column(columnDefinition = "TEXT")
     @Setter(AccessLevel.NONE)
     private String k;
-    private HashSet<String> keys;
+    private List<String> keyValues;
 
     @Builder
-    public MultiKey(String k, HashSet<String> keys) {
+    public MultiKey(String k, List<String> keyValues) {
         this.k = k;
-        this.keys = keys;
+        this.keyValues = keyValues;
     }
 }
