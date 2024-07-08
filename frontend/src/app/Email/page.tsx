@@ -13,7 +13,7 @@ export default function email() {
                 <div className="w-full h-30 flex flex-row gap-10 justify-center">
                     <button id="button1" onClick={() => setOpen(!open)}>받은 메일</button>
                     <DropDown open={open} onClose={() => setOpen(false)} className="" defaultDriection={Direcion.DOWN} width={200} height={200} button="button1">
-                        1
+                        테스트 입니다!
                     </DropDown>
                     <button id="button2" onClick={() => setOpen1(!open1)}>받은 메일</button>
                     <DropDown open={open1} onClose={() => setOpen1(false)} className="" defaultDriection={Direcion.DOWN} width={200} height={200} button="button2">
