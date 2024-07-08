@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd /frontend
-./run.sh 
+/run.sh 
