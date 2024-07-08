@@ -4,4 +4,4 @@ COPY ./frontend/package*.json /frontend/
 RUN npm install
 COPY /frontend/. /frontend/
 RUN npm run build
-CMD ["npm", "run", "start"]
+CMD ["/run.sh"]
