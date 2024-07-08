@@ -1,23 +1,23 @@
 #!/bin/bash
 
-SHOPPING_PID=$(ps -ef | grep next-server | awk '{print $2}')
+FRONT_PID=$(ps -ef | grep next-server | awk '{print $2}')
 
 
-if [ -z "$SHOPPING_PID" ];
+if [ -z "$FRONT_PID" ];
 
 then
 
-    echo "SHOPPING_FRONT is not running"
+    echo "FRONT_FRONT is not running"
 
 else
 
-    kill -9 $SHOPPING_PID
+    kill -9 $FRONT_PID
 
-    echo "SHOPPING_FRONT stopped."
+    echo "FRONT_FRONT stopped."
 	
-	LOG=/home/ubuntu/shopping/frontend/shopping.log
+	LOG=/home/ubuntu/honeybadger/frontend/front.log
 
-	echo "SHOPPING_FRONT started."
+	echo "FRONT_FRONT started."
 	 
 	nohup npm run start > $LOG 2>&1 &
 fi
