@@ -5,5 +5,6 @@ RUN npm install
 COPY /frontend/. /frontend/
 RUN npm run build
 WORKDIR /
+RUN echo "hi"
 COPY run.sh run.sh
 CMD ["/run.sh"]
