@@ -7,4 +7,4 @@ COPY /frontend/. /frontend/
 RUN npm run build
 WORKDIR /
 COPY run.sh run.sh
-CMD ["/run.sh"]
+#CMD ["/run.sh"]
