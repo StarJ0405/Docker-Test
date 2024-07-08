@@ -16,7 +16,7 @@ else
     echo "FRONT_FRONT stopped."
 	
 fi
-LOG=/home/ubuntu/honeybadger/frontend/front.log
+LOG=/home/ubuntu/honeybadger/front.log
 
 echo "FRONT_FRONT started."
 
