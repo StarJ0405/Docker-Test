@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./frontend/run.sh &
+./frontend/run.sh
