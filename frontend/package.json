@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": "20.15.0",
+    "npm": "10.7.0"
+  },
   "dependencies": {
     "@stomp/stompjs": "^7.0.0",
     "@types/react-stars": "^2.2.4",
