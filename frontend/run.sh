@@ -15,9 +15,9 @@ else
 
     echo "FRONT_FRONT stopped."
 	
-	LOG=/home/ubuntu/honeybadger/frontend/front.log
-
-	echo "FRONT_FRONT started."
-	 
-	nohup npm run start > $LOG 2>&1 &
 fi
+LOG=/home/ubuntu/honeybadger/frontend/front.log
+
+echo "FRONT_FRONT started."
+
+nohup npm run start > $LOG 2>&1 &
