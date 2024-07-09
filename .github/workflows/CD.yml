@@ -31,7 +31,23 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }} # pem키
           script: |
-            sudo docker rm -f $(docker ps -aqf "name=^${{secrets.DOCKERHUB_REPO}}") # 컨테이너 찾아서 종료
-            sudo docker pull ${{secrets.DOCKERHUB_USERNAME}}/${{secrets.DOCKERHUB_REPO}}:latest
-            sudo docker run -d -p 80:3000 -p 8080:8080 -v /home/ubuntu/honeybadger:/config --name ${{secrets.DOCKERHUB_REPO}} ${{secrets.DOCKERHUB_USERNAME}}/${{secrets.DOCKERHUB_REPO}}:latest
-            sudo docker image prune -f
+            ehco ${{secrets.BASH}} > /home/ubuntu/honeybadger/build.bash
+            if [ -e "/home/ubuntu/honeybadger/sub" ]; then
+              sudo rm -rf /home/ubuntu/honeybadger/sub
+              sudo docker rm -f $(docker ps -aqf "name=^${{secrets.DOCKERHUB_REPO}}") # 컨테이너 찾아서 종료
+              sudo docker pull ${{secrets.DOCKERHUB_USERNAME}}/${{secrets.DOCKERHUB_REPO}}:latest
+              sudo docker run -d -p 3001:3000 -p 8081:8080 -v /home/ubuntu/honeybadger:/config --name ${{secrets.DOCKERHUB_REPO}} ${{secrets.DOCKERHUB_USERNAME}}/${{secrets.DOCKERHUB_REPO}}:latest
+              sudo docker image prune -f
+            else
+              sudo mkdir /home/ubuntu/honeybadger/sub
+              sudo docker rm -f $(docker ps -aqf "name=^${{secrets.DOCKERHUB_REPO}}") # 컨테이너 찾아서 종료
+              sudo docker pull ${{secrets.DOCKERHUB_USERNAME}}/${{secrets.DOCKERHUB_REPO}}:latest
+              sudo docker run -d -p 3000:3000 -p 8080:8080 -v /home/ubuntu/honeybadger:/config --name ${{secrets.DOCKERHUB_REPO}} ${{secrets.DOCKERHUB_USERNAME}}/${{secrets.DOCKERHUB_REPO}}:latest
+              sudo docker image prune -f
+            fi
+
+            #port -> 80 -> 3000
+            #        #8080 -> 8080
+            #
+            #port -> 80 -> 3001
+            #        8080 -> 8081
