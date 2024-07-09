@@ -8,7 +8,7 @@ sudo docker image prune -f
 while true; do
   # 실행할 명령어
   response=$(curl -s localhost:8080/api/track/health)
-  if [[ ${response} =~ "UP" ]]; then
+  if [[ "${response}" =~ "UP" ]]; then
     # 서비스가 실행 중인 경우
     sudo rm -rf /home/ubuntu/honeybadger/sub
     sudo docker rm -f $(docker ps -aqf "name=^${DOCKERHUB_REPO}2") # 컨테이너 찾아서 종료
@@ -25,7 +25,7 @@ done
 while true; do
   # 실행할 명령어
   response=$(curl -s localhost:8081/api/track/health)
-  if [[ ${response} =~ "UP" ]]; then
+  if [[ "${response}" =~ "UP" ]]; then
     # 서비스가 실행 중인 경우
     sudo rm -rf /home/ubuntu/honeybadger/sub
     sudo docker rm -f $(docker ps -aqf "name=^${DOCKERHUB_REPO}1") # 컨테이너 찾아서 종료        
