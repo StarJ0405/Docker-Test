@@ -1,7 +1,7 @@
 #!/bin/bash
 
 JAR=HoneyBadger-0.0.1-SNAPSHOT.jar
-LOG=/back.log
+LOG=/config/back.log
 
 echo "BACK started."
 
