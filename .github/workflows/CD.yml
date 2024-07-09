@@ -11,7 +11,7 @@ jobs:
       - name: application.yml 생성
         env:
           ACTIONS_STEP_DEBUG: true
-          APLLICATION_SECRET: ${{secrets.APLLICATION_SECRET}}
+          APPLICATION_SECRET: ${{secrets.APPLICATION_SECRET}}
         run: echo "$APPLICATION_SECRET" > backend/src/main/resources/application.yml
       - name: Login to DockerHub
         uses: docker/login-action@v1
