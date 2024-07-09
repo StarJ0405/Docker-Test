@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOG=/front.log
+LOG=/config/front.log
 
 echo "FRONT started."
 
