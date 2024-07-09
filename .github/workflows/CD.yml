@@ -26,14 +26,12 @@ jobs:
       - name: Deploy to server
         uses: appleboy/ssh-action@master
         id: deploy
-        env:
-            BASH_SECRET: ${{secrets.BASH}}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }} # pem키
           script: |
-            echo "$BASH_SECRET" > /home/ubuntu/honeybadger/build.bash
+            ehco ${{secrets.BASH}}
             if [ -e "/home/ubuntu/honeybadger/sub" ]; then
               sudo rm -rf /home/ubuntu/honeybadger/sub
               sudo docker rm -f $(docker ps -aqf "name=^${{secrets.DOCKERHUB_REPO}}") # 컨테이너 찾아서 종료
