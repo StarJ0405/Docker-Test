@@ -2,6 +2,6 @@
 
 LOG=/front.log
 
-echo "FRONT_FRONT started."
+echo "FRONT started."
 
-npm run start
+nohup npm run start > $LOG 2>&1 &

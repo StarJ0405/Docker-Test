@@ -1,5 +1,13 @@
 #!/bin/bash
 
-ls
 cd /frontend
-/run.sh 
+./run.sh
+
+cd /backend
+./run.sh
+
+echo "loop start"
+while :
+do
+    sleep 1
+done
