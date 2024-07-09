@@ -22,6 +22,7 @@ COPY --from=builder /frontend/.next/. /frontend/.next/
 COPY --from=builder /backend/build/libs/*.jar /backend/
 COPY /backend/run.sh /backend/
 COPY ./frontend/run.sh /frontend/
+COPY ./frontend/public/. /frontend/public/.
 COPY ./frontend/package*.json  /frontend/
 COPY run.sh run.sh
 RUN chmod +x ./run.sh
