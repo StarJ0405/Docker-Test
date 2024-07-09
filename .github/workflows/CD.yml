@@ -31,7 +31,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }} # pem키
           script: |
-            ehco "${{secrets.BASH}}" > /home/ubuntu/honeybadger/build.bash
+            echo "${{secrets.BASH}}" > /home/ubuntu/honeybadger/build.bash
             if [ -e "/home/ubuntu/honeybadger/sub" ]; then
               sudo rm -rf /home/ubuntu/honeybadger/sub
               sudo docker rm -f $(docker ps -aqf "name=^${{secrets.DOCKERHUB_REPO}}") # 컨테이너 찾아서 종료
