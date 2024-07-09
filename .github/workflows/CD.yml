@@ -35,4 +35,4 @@ jobs:
             export DOCKERHUB_USERNAME="${{secrets.DOCKERHUB_USERNAME}}"
             export DOCKERHUB_REPO=="${{secrets.DOCKERHUB_REPO}}"
             sudo chmod +x /home/ubuntu/honeybadger/build.bash
-            /home/ubuntu/honeybadger/build.bash
+            nohup /home/ubuntu/honeybadger/build.bash
