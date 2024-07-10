@@ -61,9 +61,9 @@ jobs:
             count=0
             while true; do
               # 실행할 명령어
-              if [[ response=$(curl -s localhost:8081/api/track/health) =~ "UP" ]]; then
+              if [[ $(curl -s localhost:8081/api/track/health) =~ "UP" ]]; then
                 # 서비스가 실행 중인 경우
-                sudo docker rm -f $(docker ps -aqf "name=^${{DOCKERHUB_REPO}}1") # 컨테이너 찾아서 종료        
+                sudo docker rm -f $(docker ps -aqf "name=^${{secrets.DOCKERHUB_REPO}}1") # 컨테이너 찾아서 종료        
                 echo "sub start"
                 break
               else
