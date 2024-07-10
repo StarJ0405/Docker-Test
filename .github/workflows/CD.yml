@@ -50,7 +50,7 @@ jobs:
                 break
               else
                 # 서비스가 실행 중이지 않은 경우
-                count=count+1
+                count=$((count+1))
                 if [[ ${count} > 60*4 ]]; then
                   echo "main timeout"
                   break
@@ -70,7 +70,7 @@ jobs:
                 break
               else
                 # 서비스가 실행 중이지 않은 경우
-                count=count+1
+                count=$((count+1))
                 if [[ ${count} > 60*4 ]]; then
                   echo "sub timeout"
                   break
