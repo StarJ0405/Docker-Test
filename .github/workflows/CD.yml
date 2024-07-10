@@ -29,7 +29,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }} # pem키
+          password: ${{ secrets.KEY }} # pem키
           script: |
             sudo docker pull ${{secrets.DOCKERHUB_USERNAME}}/${{secrets.DOCKERHUB_REPO}}:latest # 최신 도커 이미지 다운로드
             # sub 시작
