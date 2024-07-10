@@ -38,16 +38,16 @@ jobs:
             sudo docker run -d -p 3001:3000 -p 8081:8080 -v /home/ubuntu/honeybadger:/config --name "${{secrets.DOCKERHUB_REPO}}_sub" ${{secrets.DOCKERHUB_USERNAME}}/${{secrets.DOCKERHUB_REPO}}:latest
             count=0
             while true; do
-              # sub 실행 완료 및 main 시작
               if [[ $(curl -s localhost:8081/api/track/health) =~ "UP" ]]; then
-                # sub 실행 완료 main 실행
+                # sub 실행 완료 및 main 시작
                 sudo docker rm -f $(docker ps -aqf "name=^${{secrets.DOCKERHUB_REPO}}") # 컨테이너 찾아서 종료
                 sudo docker run -d -p 3000:3000 -p 8080:8080 -v /home/ubuntu/honeybadger:/config --name "${{secrets.DOCKERHUB_REPO}}" ${{secrets.DOCKERHUB_USERNAME}}/${{secrets.DOCKERHUB_REPO}}:latest
                 echo "sub finish main start"
+                break
               else
                 # sub 실행 대기
                 count=$((count+1))
-                if [[ ${count} -gt 300 ]]; then
+                if [[ ${count} -gt 180 ]]; then
                   echo "main timeout"
                   break
                 else
@@ -67,7 +67,7 @@ jobs:
               else
                 # main 실행 대기
                 count=$((count+1))
-                if [[ ${count} -gt 300 ]]; then
+                if [[ ${count} -gt 180 ]]; then
                   echo "sub timeout"
                   break
                 else
