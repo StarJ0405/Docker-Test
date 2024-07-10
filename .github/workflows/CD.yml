@@ -40,6 +40,9 @@ jobs:
             while true; do
               if [[ $(curl -s localhost:8081/api/track/health) =~ "UP" ]]; then
                 # sub 실행 완료 및 main 시작
+                sudo iptables -t nat -D PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+                sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3001
+                sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 8081
                 sudo docker rm -f $(docker ps -aqf "name=^${{secrets.DOCKERHUB_REPO}}") # 컨테이너 찾아서 종료
                 sudo docker run -d -p 3000:3000 -p 8080:8080 -v /home/ubuntu/honeybadger:/config --name "${{secrets.DOCKERHUB_REPO}}" ${{secrets.DOCKERHUB_USERNAME}}/${{secrets.DOCKERHUB_REPO}}:latest
                 echo "sub finish main start"
@@ -60,6 +63,9 @@ jobs:
             while true; do
               if [[ $(curl -s localhost:8080/api/track/health) =~ "UP" ]]; then
                 # main 실행 완료 sub 종료
+                sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+                sudo iptables -t nat -D PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3001
+                sudo iptables -t nat -D PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 8081
                 sudo docker rm -f $(docker ps -aqf "name=^${{secrets.DOCKERHUB_REPO}}_sub") # 컨테이너 찾아서 종료        
                 echo "sub start"
                 sudo docker image prune -f
