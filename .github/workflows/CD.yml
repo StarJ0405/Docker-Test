@@ -63,9 +63,9 @@ jobs:
             while true; do
               if [[ $(curl -s localhost:8080/api/track/health) =~ "UP" ]]; then
                 # main 실행 완료 sub 종료
-                sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
                 sudo iptables -t nat -D PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3001
                 sudo iptables -t nat -D PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 8081
+                sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
                 sudo docker rm -f $(docker ps -aqf "name=^${{secrets.DOCKERHUB_REPO}}_sub") # 컨테이너 찾아서 종료        
                 echo "sub start"
                 sudo docker image prune -f
