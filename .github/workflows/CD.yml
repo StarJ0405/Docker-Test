@@ -55,7 +55,7 @@ jobs:
                   echo "main timeout"
                   break
                 else
-                  echo $(count)
+                  echo "$(count)"
                   sleep 1
                 fi
             fi
@@ -75,7 +75,7 @@ jobs:
                   echo "sub timeout"
                   break
                 else
-                  echo $(count)
+                  echo "$(count)"
                   sleep 1
                 fi
               fi
