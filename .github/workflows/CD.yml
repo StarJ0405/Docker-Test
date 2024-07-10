@@ -51,11 +51,11 @@ jobs:
               else
                 # 서비스가 실행 중이지 않은 경우
                 count=$((count+1))
-                if [[ ${count} > 60*4 ]]; then
+                if [[ ${count} > 300 ]]; then
                   echo "main timeout"
                   break
                 else
-                  echo count
+                  echo $(count)
                   sleep 1
                 fi
             fi
@@ -71,11 +71,11 @@ jobs:
               else
                 # 서비스가 실행 중이지 않은 경우
                 count=$((count+1))
-                if [[ ${count} > 60*4 ]]; then
+                if [[ ${count} > 300 ]]; then
                   echo "sub timeout"
                   break
                 else
-                  echo count
+                  echo $(count)
                   sleep 1
                 fi
               fi
