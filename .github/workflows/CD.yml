@@ -31,6 +31,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.KEY }} # pem키
           script: |
+            whoami
             sudo docker pull ${{secrets.DOCKERHUB_USERNAME}}/${{secrets.DOCKERHUB_REPO}}:latest # 최신 도커 이미지 다운로드
             # sub 시작
             echo "sub start"
